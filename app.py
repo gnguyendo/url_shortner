@@ -63,7 +63,13 @@ def list_urls():
         result = cursor.fetchall()
         connection.commit()
         cursor.close()
-        return list(result)
+
+
+        response = make_response(result[0], 200)
+        response.mimetype = "text/plain"
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return list(response)
+        # return list(result)
     finally:
         if connection:
             connection.close()
