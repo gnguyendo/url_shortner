@@ -44,8 +44,11 @@ def redirect_url():
         result = cursor.fetchone()
         connection.commit()
         cursor.close()
-        print(result)
-        return result[0]
+
+        response = make_response(result[0], 200)
+        response.mimetype = "text/plain"
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
     finally:
         if connection:
             connection.close()
