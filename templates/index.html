@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Url Shortner</title>
+    <meta charset="utf-8">
+
+</head>
+
+<body>
+    <h1>Url Shortner</h1>
+
+    <form id="form" action="{{/shorten_url}}" method="post" >
+        Enter URL: <input type="text" name="original_url" id="original_url" placeholder="www.example.com">
+        <input type="submit" value="Submit">
+    </form>
+
+
+    <script>
+        document.querySelector('form').addEventListener('submit', async e => {
+            e.preventDefault();
+            const data = new FormData(e.target);
+            const url = Array.from(data.entries())[0][1];
+            console.log(url);
+            
+            const response = await fetch(`http://127.0.0.1:5000/shorten_url?original_url=${encodeURIComponent(url)}`, {
+                method: "POST",
+    
+            });
+            console.log("hello")
+            const text = await response.text();
+            // console.log("Request complete! response:", res);
+            console.log(text)
+        });
+
+
+    </script>
+</body>
+
+</html>

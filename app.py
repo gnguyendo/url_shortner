@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask, request, render_template
+from flask import Flask, request, make_response
 import hashlib
 import base64
 
@@ -18,12 +18,17 @@ def shortern_url():
         connection = sqlite3.connect('urls.db')
         cursor = connection.cursor()
         original_url = request.args['original_url']
+        # original_url = request.form.get("original_url")
         hash = md5_hash(original_url)
         shortened_url = url_from_hash(hash)
         cursor.execute("INSERT INTO urls (original_url, shortened_url) VALUES (?, ?);",  (original_url, shortened_url))
         connection.commit()
         cursor.close()
-        return shortened_url
+        response = make_response(shortened_url, 200)
+        response.mimetype = "text/plain"
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
+        # return shortened_url
     finally:
         if connection:
             connection.close()
