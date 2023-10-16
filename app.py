@@ -64,11 +64,11 @@ def list_urls():
         connection.commit()
         cursor.close()
 
-
-        response = make_response(result[0], 200)
+        response = make_response(result, 200)
         response.mimetype = "text/plain"
         response.headers.add('Access-Control-Allow-Origin', '*')
-        return list(response)
+        print(response)
+        return response
         # return list(result)
     finally:
         if connection:
