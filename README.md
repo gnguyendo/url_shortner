@@ -20,10 +20,11 @@ sudo apt install sqite3
 
 ## Instructions
 
-
 ## Starting Server
 ```
 flask -app app run
 ```
 
-## Starting Database
+## Using Web Page
+- Entered URL can transform url to a shortened url and also takes in the shortened URL to display the original URL
+- Show All URLS will 
