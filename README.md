@@ -27,4 +27,3 @@ flask -app app run
 
 ## Using Web Page
 - Entered URL can transform url to a shortened url and also takes in the shortened URL to display the original URL
-- Show all URLS will display all original URLs along with shortened URLs
