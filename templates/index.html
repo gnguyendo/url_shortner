@@ -18,12 +18,6 @@
     <button type="button" id="allurls" action="{{/list_urls}}" value="Submit">Show all URLS </button>
 
     <div id="resultUrl"></div>
-    <div>
-        <h3>All URLS</h3>
-        <ol id="showallurls">
-
-        </ol>
-    </div>
     <script>
         document.querySelector('form').addEventListener('submit', async e => {
             e.preventDefault();
@@ -44,17 +38,6 @@
             const text = await response.text();
             document.getElementById("resultUrl").innerHTML = text;
         });
-
-        document.getElementById('allurls').addEventListener("click", async e => {
-            e.preventDefault();
-            const response = await fetch(`http://127.0.0.1:5000/list_urls`, {
-                method: 'GET'
-            });
-            const text = await response.json();
-            for (const url of text) {
-                document.getElementById("showallurls").innerHTML += `<li> Original URL: ${url[0]}  <br/> Shortened URL: ${url[1]}</li>`
-            }
-        }, { once: true });
 
 
     </script>
